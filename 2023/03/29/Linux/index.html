@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="x5-fullscreen" content="true">
+<meta name="full-screen" content="yes">
+<meta name="theme-color" content="#317EFB" />
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
+<meta name="description" content="Author：Eric Version：9.0.1  [TOC] 一、引言 1.1 开发环境 平时大家大多是在Windows或者Mac操作系统下去编写代码进行开发，在开发环境中安装大量的软件，这样会导致环境的稳定性和安全性降低  1.2 生产环境 是将程序运行在此环境中，供用户去使用。这个环境是有专业的人员去维护，一般人是没有权限去操做生产环境的  1.3 测试环境 一般克隆一份生产环境，会将">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux安装使用以及常见命令">
+<meta property="og:url" content="https://evil-man.gitee.io/ehan/2023/03/29/Linux/index.html">
+<meta property="og:site_name" content="ehanblog">
+<meta property="og:description" content="Author：Eric Version：9.0.1  [TOC] 一、引言 1.1 开发环境 平时大家大多是在Windows或者Mac操作系统下去编写代码进行开发，在开发环境中安装大量的软件，这样会导致环境的稳定性和安全性降低  1.2 生产环境 是将程序运行在此环境中，供用户去使用。这个环境是有专业的人员去维护，一般人是没有权限去操做生产环境的  1.3 测试环境 一般克隆一份生产环境，会将">
+<meta property="og:locale">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="og:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+<meta property="article:published_time" content="2023-03-29T09:18:19.922Z">
+<meta property="article:modified_time" content="2023-03-30T07:11:49.872Z">
+<meta property="article:author" content="Mr Wang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://evil-man.gitee.io/ehan/img/404.jpg">
+
+
+<title >Linux安装使用以及常见命令</title>
+
+<!-- Favicon -->
+
+    <link href='/ehan/img/favicon.svg?v=2.0.4' rel='icon' type='image/png' sizes='16x16' ></link>
+
+
+    <link href='/ehan/img/favicon.png?v=2.0.4' rel='icon' type='image/png' sizes='32x32' ></link>
+
+
+
+
+<!-- Plugin -->
+
+
+
+
+    
+<link rel="stylesheet" href="/ehan/css/plugins/bootstrap.row.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.css">
+
+    
+<link rel="stylesheet" href="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.css">
+
+    
+    
+
+
+
+
+<!-- Icon -->
+
+    
+<link rel="stylesheet" href="/ehan/css/plugins/font-awesome.min.css">
+
+
+
+    
+<script src="//at.alicdn.com/t/c/font_3023168_rtkz4w4zc8.js"></script>
+
+
+
+<!-- Variable -->
+<script>window.ASYNC_CONFIG = {"hostname":"evil-man.gitee.io","author":"Mr Wang","root":"/ehan/","typed_text":["阅读博客"],"theme_version":"2.0.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.png","icon16":"/img/favicon.svg","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"icon-sun","moon":"icon-moon","play":"fas fa-play","email":"icon-email-fill","next":"fas fa-arrow-right","calendar":"icon-a-riqi11","clock":"icon-shijian","user":"icon-zuozhe","back_top":"icon-fanhuidingbu","close":"icon-guanbi","search":"fas fa-search","reward":"icon-dashang-01","user_tag":"icon-yonghu","toc_tag":"icon-mulu","read":"icon-yuedu","arrows":"icon-moduanzuoyouzhankai","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"symbol","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-03-30 15:11:49"};</script>
+
+<!-- Theme mode css -->
+<link data-swup-theme rel="stylesheet" href="/ehan/css/index.css?v=2.0.4" id="trm-switch-style">
+<script>
+    let defaultMode = ASYNC_CONFIG.theme.default !=='auto' ?  ASYNC_CONFIG.theme.default : (window.matchMedia("(prefers-color-scheme: light)").matches ? 'style-light' : 'style-dark')
+    let catchMode = localStorage.getItem('theme-mode') || defaultMode;
+    let type = catchMode === 'style-dark' ? 'add' : 'remove';
+    document.documentElement.classList[type]('dark')
+</script>
+
+<!-- CDN -->
+
+
+    
+    
+
+
+
+<!-- Site Analytics -->
+ 
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<body>
+
+  <!-- app wrapper -->
+  <div class="trm-app-frame">
+
+    <!-- page preloader -->
+    <div class="trm-preloader">
+    <div class="trm-holder">
+        <div class="preloader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+    <!-- page preloader end -->
+
+    <!-- change mode preloader -->
+    <div class="trm-mode-swich-animation-frame">
+    <div class="trm-mode-swich-animation">
+        <i class="i-sun"><svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-sun"></use>
+</svg></i>
+        <div class="trm-horizon"></div>
+        <i class="i-moon"><svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-moon"></use>
+</svg></i>
+    </div>
+</div>
+    <!-- change mode preloader end -->
+
+      <!-- scroll container -->
+      <div id="trm-dynamic-content" class="trm-swup-animation">
+        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
+          <div data-scroll-section id="content" class="trm-scroll-section">
+
+            <div class="locomotive-scroll__sticky-target" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; pointer-events: none;"></div>
+
+            <!-- top bar -->
+            <header class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+	<div class="container">
+		<div class="trm-left-side">
+			<!-- logo -->
+<a href="/ehan/" class="trm-logo-frame trm-anima-link">
+    
+        <img alt="logo" src="/ehan/img/favicon.png">
+    
+    
+        <div class="trm-logo-text">
+            饿<span>汉</span>
+        </div>
+    
+</a>
+<!-- logo end -->
+		</div>
+		<div class="trm-right-side">
+			<!-- menu -->
+<div class="trm-menu">
+    <nav>
+        <ul>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/" target="">
+                    首页
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/archives/" target="">
+                    归档
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/categories/" target="">
+                    分类
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/tags/" target="">
+                    标签
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/links/" target="">
+                    友链
+                </a>
+                
+            </li>
+            
+            <li class="menu-item-has-children ">
+                <a  href="/ehan/about/" target="">
+                    关于
+                </a>
+                
+            </li>
+            
+        </ul>
+    </nav>
+</div>
+<!-- menu end -->
+			
+    <!-- mode switcher place -->
+    <div class="trm-mode-switcher-place">
+        <div class="trm-mode-switcher">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-sun"></use>
+</svg>
+            <input class="tgl tgl-light" id="trm-swich" type="checkbox">
+            <label class="trm-swich" for="trm-swich"></label>
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-moon"></use>
+</svg>
+        </div>
+    </div>
+    <!-- mode switcher place end -->
+
+			
+		</div>
+		<div class="trm-menu-btn">
+			<span></span>
+		</div>
+	</div>
+</header>
+            <!-- top bar end -->
+
+            <!-- body -->
+            
+<div class="trm-content-start">
+    <!-- banner -->
+    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
+    
+    <!-- banner cover -->
+    <img style="object-position:top;object-fit:cover;" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3" src="https://pic1.zhimg.com/v2-b3c2c6745b9421a13a3c4706b19223b3_r.jpg">
+    <!-- banner cover end -->
+    
+
+    <!-- banner content -->
+    <div class="trm-banner-content trm-overlay">
+        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
+            <div class="row">
+                
+                <div class="col-lg-4"></div>
+                
+                <div class="col-lg-8">
+
+                    <!-- banner title -->
+                    <div class="trm-banner-text ">
+                        <div class="trm-label trm-mb-20">
+                            Hi my new friend!
+                        </div>
+                        <h1 class="trm-mb-30 trm-hsmb-font">
+                            Linux安装使用以及常见命令
+                        </h1>
+
+                        
+                            <ul class="trm-breadcrumbs trm-label">
+                                <li>
+                                    <a href="/ehan/" class="trm-anima-link">Home</a>
+                                </li>
+                                <li>
+                                    <span>
+                                        2023
+                                    </span
+                                ></li>
+                            </ul>
+                        
+                    </div>
+                    <!-- banner title end -->
+
+                    <!-- scroll hint -->
+                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
+                        <div class="trm-scroll-hint"></div>
+                        <span class="trm-label">Scroll down</span>
+                    </a>
+                    <!-- scroll hint end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- banner content end -->
+</div>
+    <!-- banner end -->
+    <div class="container">
+        <div class="row">
+            
+                <div id="page-sidebar" class="col-lg-4 hidden-sm">
+                    <!-- main card -->
+                    
+
+<div class="trm-main-card-frame trm-sidebar">
+    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="60"> 
+    
+        <div class="trm-user-tabs" id="sidebar-tabs">
+           <div class="trm-tabs-nav trm-mb-40" id="trm-tabs-nav">
+                <div data-to="tabs-user" class="trm-tabs-nav-item">
+                    <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-yonghu"></use>
+</svg>
+                </div>
+                <div data-to="tabs-toc" class="trm-tabs-nav-item active">
+                    <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-mulu"></use>
+</svg>
+                </div>
+           </div>
+            <div name="tabs-user" class="trm-tabs-item">
+                <!-- card header -->
+<div class="trm-mc-header">
+    <div class="trm-avatar-frame trm-mb-20">
+        <img alt="Avatar" class="trm-avatar" src="/ehan/img/avatar.jpg">
+    </div>
+    <h5 class="trm-name trm-mb-15">
+        饿汉博客
+    </h5>
+    
+        <div class="trm-label">
+            欢迎
+            <span class="trm-typed-text">
+                <!-- Words for theme.user.typedText -->
+            </span>
+        </div>
+    
+</div>
+<!-- card header end -->
+                <!-- sidebar social -->
+
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<div class="trm-social">
+    
+        <a href="https://github.com" title="github" rel="nofollow" target="_blank">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-github-fill"></use>
+</svg>
+        </a>
+    
+        <a href="https://gitee.com" title="gitee" rel="nofollow" target="_blank">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-gitee-fill-round"></use>
+</svg>
+        </a>
+    
+        <a href="https://weibo.com" title="微博" rel="nofollow" target="_blank">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-weibo"></use>
+</svg>
+        </a>
+    
+        <a href="https://weibo.com" title="Rss" rel="nofollow" target="_blank">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-rss"></use>
+</svg>
+        </a>
+    
+</div>
+
+<!-- sidebar social end -->
+                <!-- info -->
+<div class="trm-divider trm-mb-40 trm-mt-40"></div>
+<ul class="trm-table trm-mb-20">
+    
+        <li>
+            <div class="trm-label">
+                工作:
+            </div>
+            <div class="trm-label trm-label-light">
+                java
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                住址:
+            </div>
+            <div class="trm-label trm-label-light">
+                南京
+            </div>
+        </li>
+    
+        <li>
+            <div class="trm-label">
+                爱好:
+            </div>
+            <div class="trm-label trm-label-light">
+                篮球
+            </div>
+        </li>
+    
+</ul>
+<!-- info end -->
+
+                
+    <div class="trm-divider trm-mb-40 trm-mt-40"></div>
+    <!-- action button -->
+    <div class="text-center">
+        <a href="mailto:wk469269478@163.com" class="trm-btn">
+            联系我
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-email-fill"></use>
+</svg>
+        </a>
+    </div>
+    <!-- action button end -->
+
+            </div>
+            <div name="tabs-toc" class="trm-tabs-item active">
+                <div class="post-toc">
+    <ol class="toc"><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#一、引言"  data-scroll-to="#一、引言"><span class="toc-number">1.</span> <span class="toc-text">一、引言</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#二、Linux介绍"  data-scroll-to="#二、Linux介绍"><span class="toc-number">2.</span> <span class="toc-text">二、Linux介绍</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#三、Linux安装"  data-scroll-to="#三、Linux安装"><span class="toc-number">3.</span> <span class="toc-text">三、Linux安装</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#四、Linux的目录结构"  data-scroll-to="#四、Linux的目录结构"><span class="toc-number">4.</span> <span class="toc-text">四、Linux的目录结构</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#五、Linux的基本命令"  data-scroll-to="#五、Linux的基本命令"><span class="toc-number">5.</span> <span class="toc-text">五、Linux的基本命令</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#六、Linux目录命令【重点】"  data-scroll-to="#六、Linux目录命令【重点】"><span class="toc-number">6.</span> <span class="toc-text">六、Linux目录命令【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#七、Linux的文件命令【重点】"  data-scroll-to="#七、Linux的文件命令【重点】"><span class="toc-number">7.</span> <span class="toc-text">七、Linux的文件命令【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#八、Linux的压缩包命令【重点】"  data-scroll-to="#八、Linux的压缩包命令【重点】"><span class="toc-number">8.</span> <span class="toc-text">八、Linux的压缩包命令【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#九、用户-amp-用户组的操作"  data-scroll-to="#九、用户-amp-用户组的操作"><span class="toc-number">9.</span> <span class="toc-text">九、用户&amp;用户组的操作</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#十、文件权限的修改【重点】"  data-scroll-to="#十、文件权限的修改【重点】"><span class="toc-number">10.</span> <span class="toc-text">十、文件权限的修改【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#十一、Linux的其他操作命令【重点】"  data-scroll-to="#十一、Linux的其他操作命令【重点】"><span class="toc-number">11.</span> <span class="toc-text">十一、Linux的其他操作命令【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#十二、Linux下安装软件【重点】"  data-scroll-to="#十二、Linux下安装软件【重点】"><span class="toc-number">12.</span> <span class="toc-text">十二、Linux下安装软件【重点】</span></a></li><li class="toc-item toc-level-3"><a rel="nofollow" class="toc-link" href="#十三、部署SSM工程"  data-scroll-to="#十三、部署SSM工程"><span class="toc-number">13.</span> <span class="toc-text">十三、部署SSM工程</span></a></li></ol>
+</div>
+            </div>
+        </div>
+    
+    </div>
+</div>
+                    <!-- main card end -->
+                </div>
+            
+            <div id="page-content" class="col-lg-8">
+                <div class="trm-content" id="trm-content">
+                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
+
+                    <div id="post-info" class="row hidden-sm">
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <svg class="symbol-icon trm-icon" aria-hidden="true">
+    <use xlink:href="#icon-a-riqi11"></use>
+</svg><br>
+            03/29
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="trm-card trm-label trm-label-light text-center">
+            <svg class="symbol-icon trm-icon" aria-hidden="true">
+    <use xlink:href="#icon-shijian"></use>
+</svg><br>
+            17:18
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div id="post-author" class="trm-card trm-label trm-label-light text-center">
+            <svg class="symbol-icon trm-icon" aria-hidden="true">
+    <use xlink:href="#icon-zuozhe"></use>
+</svg><br>
+            Mr Wang
+        </div>
+    </div>
+</div>
+<div class="trm-card ">
+    <article id="article-container" class="trm-publication">
+    <p><img src="/img/Linux/1586185429977.png" alt="1586185429977" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></p>
+<blockquote>
+<p>Author：Eric</p>
+<p>Version：9.0.1</p>
+</blockquote>
+<p>[TOC]</p>
+<h3 id="一、引言"><a href="#一、引言" class="headerlink" title="一、引言"></a>一、引言</h3><hr>
+<h4 id="1-1-开发环境"><a href="#1-1-开发环境" class="headerlink" title="1.1 开发环境"></a>1.1 开发环境</h4><blockquote>
+<p>平时大家大多是在Windows或者Mac操作系统下去编写代码进行开发，在开发环境中安装大量的软件，这样会导致环境的稳定性和安全性降低</p>
+</blockquote>
+<h4 id="1-2-生产环境"><a href="#1-2-生产环境" class="headerlink" title="1.2 生产环境"></a>1.2 生产环境</h4><blockquote>
+<p>是将程序运行在此环境中，供用户去使用。这个环境是有专业的人员去维护，一般人是没有权限去操做生产环境的</p>
+</blockquote>
+<h4 id="1-3-测试环境"><a href="#1-3-测试环境" class="headerlink" title="1.3 测试环境"></a>1.3 测试环境</h4><blockquote>
+<p>一般克隆一份生产环境，会将开发环境中的程序部署到测试环境中，这个环境的主要目的是去程序进程检测，收集程序中的各种问题，并交给开发人员进行修改</p>
+</blockquote>
+<h4 id="1-4-操作系统的选择"><a href="#1-4-操作系统的选择" class="headerlink" title="1.4 操作系统的选择"></a>1.4 操作系统的选择</h4><blockquote>
+<p>生产环境中，常用的操作系统有Windows 2003 service，Linux，Unix等等，Linux操作系统，在生产环境中占据了大量的市场份额，Linux主要以稳定，可靠，免费的特点成为全球使用最多的服务器操作系统。</p>
+<p>Linux操作系统现在已经成为后台开发人员必备的技能，并且后期学习的各种知识都会涉及到Linux操作系统。</p>
+</blockquote>
+<h3 id="二、Linux介绍"><a href="#二、Linux介绍" class="headerlink" title="二、Linux介绍"></a>二、Linux介绍</h3><hr>
+<h4 id="2-1-Linux介绍"><a href="#2-1-Linux介绍" class="headerlink" title="2.1 Linux介绍"></a>2.1 Linux介绍</h4><blockquote>
+<p>在Linux操作系统出现之前，还有一个操作系统叫做Minix，Minix操作系统是由Andrew的大学教授研发出来的，当时大学教授是为了给学生上课，买了一套Unix操作系统，参考Unix自己写了一个操作系统，并且命名为Minix。同时将Minix开源，供学校内部的研究和教学，到了2000年，Andrew将Minix操作系统完全对外开源。</p>
+<p>Minix由于完全对外开源之后，在互联网上迅速的传播，但是大家在使用时，发展Minix不时很完美，内部存在各种各样问题。用户将问题解决后，编写了一个补丁，将补丁以邮件的方式发给Andrew，但是Andrew教授最初的目的只是为了教学和研究。</p>
+<p>于此同时，一位芬兰的大学生出现了，叫Linus，在Minix操作系统基础上，自己添加了一些补丁和插件，并将其命名为Linux操作系统，并且完全对外开源，而且开始维护Linux操作系统。</p>
+<p>之前学习的Git也时Linus研发的。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Linus Torvalds 和 Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586225837185.png" alt="1586225837185" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h4 id="2-2-Linux的版本"><a href="#2-2-Linux的版本" class="headerlink" title="2.2 Linux的版本"></a>2.2 Linux的版本</h4><blockquote>
+<p>Linux的版本分为两种，一种是Linus团队正在维护的开源内核版本。另一种是一些厂商基于内核版本封装的发行版本。</p>
+<ul>
+<li><p>Linux的内核版本官网：<a target="_blank" rel="noopener" href="https://www.kernel.org/">https://www.kernel.org/</a></p>
+</li>
+<li><p>Linux的发行版本，咱们需要学习的发行版本就时CentOS</p>
+</li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Linux的常见发行版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586227096086.png" alt="1586227096086" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h4 id="2-3-Linux和Windows区别"><a href="#2-3-Linux和Windows区别" class="headerlink" title="2.3 Linux和Windows区别"></a>2.3 Linux和Windows区别</h4><blockquote>
+<ul>
+<li>Linux是严格区分大小写的，Windows无所谓。</li>
+<li>Linux中一切皆是文件。</li>
+<li>Linux中文件是没有后缀的，但是他有一些约定俗成的后缀。</li>
+<li>Windows下的软件一般是无法直接运行的Linux中。</li>
+</ul>
+<p><a href="">Ps：我们在学习Linux时，参考Windows下做了什么，就在Linux中做什么</a></p>
+</blockquote>
+<h3 id="三、Linux安装"><a href="#三、Linux安装" class="headerlink" title="三、Linux安装"></a>三、Linux安装</h3><hr>
+<blockquote>
+<ul>
+<li><p>安装Linux，我们需要一个虚拟机，为了安装虚拟环境：VMware或者Virtual Box（采用VMware）</p>
+<p> <a target="_blank" rel="noopener" href="https://www.vmware.com/go/getworkstation-win">https://www.vmware.com/go/getworkstation-win</a></p>
+</li>
+<li><p>为了安装Linux，我们需要一个Linux的镜像文件：CentOS7版本</p>
+<p> <a target="_blank" rel="noopener" href="http://mirrors.163.com/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso">http://mirrors.163.com/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1908.iso</a></p>
+</li>
+<li><p>安装一个连接Linux的图形化界面：Xterm，SSH，XShell（Xterm）</p>
+<p> <a target="_blank" rel="noopener" href="https://download.mobatek.net/2012020021813110/MobaXterm_Portable_v20.1.zip">https://download.mobatek.net/2012020021813110/MobaXterm_Portable_v20.1.zip</a></p>
+</li>
+</ul>
+</blockquote>
+<h4 id="3-1-安装VMware"><a href="#3-1-安装VMware" class="headerlink" title="3.1 安装VMware"></a>3.1 安装VMware</h4><blockquote>
+<p>傻瓜式安装，下一步下一步下一步……</p>
+</blockquote>
+<h4 id="3-2-安装Xterm"><a href="#3-2-安装Xterm" class="headerlink" title="3.2 安装Xterm"></a>3.2 安装Xterm</h4><blockquote>
+<p>解压即可以使用……</p>
+</blockquote>
+<h4 id="3-3-在VMware中安装Linux"><a href="#3-3-在VMware中安装Linux" class="headerlink" title="3.3 在VMware中安装Linux"></a>3.3 在VMware中安装Linux</h4><blockquote>
+<p>按照下图步骤，逐步安装Linux操作系统……‘</p>
+</blockquote>
+<h5 id="3-3-1-选择安装方式"><a href="#3-3-1-选择安装方式" class="headerlink" title="3.3.1 选择安装方式"></a>3.3.1 选择安装方式</h5><table>
+<thead>
+<tr>
+<th align="center">选择安装方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231357367.png" alt="1586231357367" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-2-指定镜像方式"><a href="#3-3-2-指定镜像方式" class="headerlink" title="3.3.2 指定镜像方式"></a>3.3.2 指定镜像方式</h5><table>
+<thead>
+<tr>
+<th align="center">选择稍后安装操作系统</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231394510.png" alt="1586231394510" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-3-选择操作系统类型"><a href="#3-3-3-选择操作系统类型" class="headerlink" title="3.3.3 选择操作系统类型"></a>3.3.3 选择操作系统类型</h5><table>
+<thead>
+<tr>
+<th align="center">选择操作系统类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231434814.png" alt="1586231434814" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-4-指定虚拟机名称"><a href="#3-3-4-指定虚拟机名称" class="headerlink" title="3.3.4 指定虚拟机名称"></a>3.3.4 指定虚拟机名称</h5><table>
+<thead>
+<tr>
+<th align="center">指定虚拟机名称，和安装目录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231466922.png" alt="1586231466922" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-5-磁盘存储方式"><a href="#3-3-5-磁盘存储方式" class="headerlink" title="3.3.5 磁盘存储方式"></a>3.3.5 磁盘存储方式</h5><table>
+<thead>
+<tr>
+<th align="center">拆分成多个文件存储</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231519493.png" alt="1586231519493" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-6-指定虚拟机配置"><a href="#3-3-6-指定虚拟机配置" class="headerlink" title="3.3.6 指定虚拟机配置"></a>3.3.6 指定虚拟机配置</h5><table>
+<thead>
+<tr>
+<th align="center">指定虚拟机的设置</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231619526.png" alt="1586231619526" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-7-开始安装CentOS"><a href="#3-3-7-开始安装CentOS" class="headerlink" title="3.3.7 开始安装CentOS"></a>3.3.7 开始安装CentOS</h5><table>
+<thead>
+<tr>
+<th align="center">开始界面选择语言</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231719094.png" alt="1586231719094" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-8-配置虚拟机网络连接"><a href="#3-3-8-配置虚拟机网络连接" class="headerlink" title="3.3.8 配置虚拟机网络连接"></a>3.3.8 配置虚拟机网络连接</h5><table>
+<thead>
+<tr>
+<th align="center">配置安装位置以及网络和主机名（开启）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231811319.png" alt="1586231811319" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-9-开始安装"><a href="#3-3-9-开始安装" class="headerlink" title="3.3.9 开始安装"></a>3.3.9 开始安装</h5><table>
+<thead>
+<tr>
+<th align="center">9、开始安装后，设置ROOT用户的密码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586231864794.png" alt="1586231864794" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-3-10-安装成功"><a href="#3-3-10-安装成功" class="headerlink" title="3.3.10 安装成功"></a>3.3.10 安装成功</h5><table>
+<thead>
+<tr>
+<th align="center">10、安装成功，并登录</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586232093005.png" alt="1586232093005" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h4 id="3-4-使用Xterm连接Linux"><a href="#3-4-使用Xterm连接Linux" class="headerlink" title="3.4 使用Xterm连接Linux"></a>3.4 使用Xterm连接Linux</h4><blockquote>
+<p>直接在Vmware中操作Linux有很多限制，我们可以在图形化界面中操作Linux操作系统</p>
+<p>具体步骤如下……</p>
+</blockquote>
+<h5 id="3-4-1-查看ip地址"><a href="#3-4-1-查看ip地址" class="headerlink" title="3.4.1 查看ip地址"></a>3.4.1 查看ip地址</h5><table>
+<thead>
+<tr>
+<th align="center">查看ip地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586238155779.png" alt="1586238155779" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="3-4-2-通过Xterm连接"><a href="#3-4-2-通过Xterm连接" class="headerlink" title="3.4.2 通过Xterm连接"></a>3.4.2 通过Xterm连接</h5><table>
+<thead>
+<tr>
+<th align="center">连接上Linux</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1588919972667.png" alt="1588919972667" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="center">连接成功</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586238257999.png" alt="1586238257999" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h3 id="四、Linux的目录结构"><a href="#四、Linux的目录结构" class="headerlink" title="四、Linux的目录结构"></a>四、Linux的目录结构</h3><hr>
+<blockquote>
+<p>Windows的目录结构是带有盘符的。D：  E： C：，而Linux中是没有盘符的</p>
+<p>在Xterm中输入ls / 查看Linux的顶级目录。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">ls /</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586239207504.png" alt="1586239207504" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>Linux的常用目录……</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Linux目录树状图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586239342796.png" alt="1586239342796" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<blockquote>
+<ul>
+<li>root：该目录为系统管理员HOME目录</li>
+<li>bin：这个目录下放着经常使用的命令</li>
+<li>boot：这里存放的是启动Linux时的一些核心文件</li>
+<li>etc：存放系统管理所需要的配置文件和子目录</li>
+<li>home：普通用户的HOME目录</li>
+<li>usr：默认安装软件的目录，类似Windows中的Program Files目录</li>
+<li>opt：是主机额外安装软件拜访的目录</li>
+</ul>
+</blockquote>
+<h3 id="五、Linux的基本命令"><a href="#五、Linux的基本命令" class="headerlink" title="五、Linux的基本命令"></a>五、Linux的基本命令</h3><hr>
+<blockquote>
+<p>Linux中命令的基本格式：命令 【选项】 【参数】</p>
+<p>需要注意，个别命令是不遵循这个格式</p>
+<p>当命令中有多个选项时，可以写在一起的，并且选项也是由简写方式的 命令 -选项A选项B</p>
+<p>Linux的基本操作命令，不遵循上述格式，但是后期会经常使用……</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 我是谁</span></span><br><span class="line"><span class="built_in">who</span> am i</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 我在哪</span></span><br><span class="line"><span class="built_in">pwd</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 查看ip 地址</span></span><br><span class="line">ip a | ip address</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 清屏</span></span><br><span class="line">clear</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. ping域名|ip</span></span><br><span class="line">ping 地址</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 强制停止</span></span><br><span class="line">Ctrl + C</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="六、Linux目录命令【重点】"><a href="#六、Linux目录命令【重点】" class="headerlink" title="六、Linux目录命令【重点】"></a>六、Linux目录命令【<code>重点</code>】</h3><hr>
+<h4 id="6-1-列出目录"><a href="#6-1-列出目录" class="headerlink" title="6.1 列出目录"></a>6.1 列出目录</h4><blockquote>
+<p>查看指定目录下的内容，默认查看当前目录下内容</p>
+<p><a href="">Linux中的隐藏文件是以.开头的，当前目录使用.表示，上一级目录使用..表示</a></p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> [-ald] [目录名]</span><br><span class="line"><span class="comment"># 目录名不填写，默认为当前目录。</span></span><br><span class="line"><span class="comment"># -a：列出的全部的文件，包括隐藏文件</span></span><br><span class="line"><span class="comment"># -l：列举出全部的信息</span></span><br><span class="line"><span class="comment"># -d：仅查看目录本身</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-2-切换目录"><a href="#6-2-切换目录" class="headerlink" title="6.2 切换目录"></a>6.2 切换目录</h4><blockquote>
+<p>实现目录间切换，使用绝对路径、相对路径、特殊符号</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> 具体路径 | 特殊符号</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>特殊符号</th>
+<th>表达的路径</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>当前目录</td>
+</tr>
+<tr>
+<td>..</td>
+<td>上一级目录</td>
+</tr>
+<tr>
+<td>/</td>
+<td>根目录</td>
+</tr>
+<tr>
+<td>~</td>
+<td>当前登录用户的HOME目录</td>
+</tr>
+<tr>
+<td>-</td>
+<td>返回</td>
+</tr>
+</tbody></table>
+<h4 id="6-3-创建目录"><a href="#6-3-创建目录" class="headerlink" title="6.3 创建目录"></a>6.3 创建目录</h4><blockquote>
+<p>创建目录，以及创建多级目录方式</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> [-p] 目录名</span><br><span class="line"><span class="comment"># -p：代表创建多级目录时，使用</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-4-删除目录"><a href="#6-4-删除目录" class="headerlink" title="6.4 删除目录"></a>6.4 删除目录</h4><blockquote>
+<p>删除非空目录或包含内容的目录</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只能删除空目录</span></span><br><span class="line"><span class="built_in">rmdir</span> 目录名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除非空目录</span></span><br><span class="line"><span class="built_in">rm</span> [-rf] 目录名</span><br><span class="line"><span class="comment"># -r：代表递归删除目录下的全部内容</span></span><br><span class="line"><span class="comment"># -f：不询问，直接删除</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-5-复制目录"><a href="#6-5-复制目录" class="headerlink" title="6.5 复制目录"></a>6.5 复制目录</h4><blockquote>
+<p>复制目录下的全部内容</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> -r 来源目录 目标目录</span><br><span class="line"><span class="comment"># -r：递归复制全部内容，必填项</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-6-移动、重命名目录"><a href="#6-6-移动、重命名目录" class="headerlink" title="6.6 移动、重命名目录"></a>6.6 移动、重命名目录</h4><blockquote>
+<p>移动、重命名目录，会根据第二个参数指定具体操作逻辑</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> 目录名 新目录名 | 路径</span><br><span class="line"><span class="comment"># 如果第二个参数指定的路径不存在，就是重命名，如果第二个参数的路径存在，就是移动</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="七、Linux的文件命令【重点】"><a href="#七、Linux的文件命令【重点】" class="headerlink" title="七、Linux的文件命令【重点】"></a>七、Linux的文件命令【<code>重点</code>】</h3><hr>
+<h4 id="7-1-创建文件"><a href="#7-1-创建文件" class="headerlink" title="7.1 创建文件"></a>7.1 创建文件</h4><blockquote>
+<p>创建空文件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">touch</span> 文件名1 文件名2 ……</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-2-编辑文件"><a href="#7-2-编辑文件" class="headerlink" title="7.2 编辑文件"></a>7.2 编辑文件</h4><blockquote>
+<p>编辑文件，后期最常的命令之一</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi 文件名 				<span class="comment"># 查看文件。（查看模式）</span></span><br><span class="line">i | a | o   		  <span class="comment"># 进入编辑模式。（编辑模式）</span></span><br><span class="line">                      <span class="comment"># i：在当前光标处，进入编辑模式。 </span></span><br><span class="line">                      <span class="comment"># a：在当前光标后一格，进入编辑模式。 </span></span><br><span class="line">                      <span class="comment"># o：在当前光标下一行，进入编辑模式。</span></span><br><span class="line">esc				      <span class="comment"># 退出编辑模式，回到查看模式。</span></span><br><span class="line">:				      <span class="comment"># 从查看模式进入到底行命令模式。（底行命名模式）</span></span><br><span class="line">                      <span class="comment"># 在底行命令模式下，输入wq：保存并退出。输入q!：不保存并退出</span></span><br><span class="line">                      <span class="comment"># 在查看模式下，摁ZZ，可以快速保存并退出。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-3-vi文件时，其他操作"><a href="#7-3-vi文件时，其他操作" class="headerlink" title="7.3 vi文件时，其他操作"></a>7.3 vi文件时，其他操作</h4><blockquote>
+<p>编辑文件时，常用的快捷键，方便操作</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在vi文件时，在底行命令模式下可以输入以下常用内容</span></span><br><span class="line"><span class="comment"># 行号操作</span></span><br><span class="line"><span class="built_in">set</span> nu              <span class="comment"># 查看文件的行号</span></span><br><span class="line">to rownum           <span class="comment"># 快速的跳转到指定行</span></span><br><span class="line"><span class="built_in">set</span> nonu            <span class="comment"># 取消行号</span></span><br><span class="line"><span class="comment"># 搜索操作</span></span><br><span class="line">/word               <span class="comment"># 类似Windows的Ctrl + F搜索文件中的具体内容所在位置，查看下一个可以输入字母n</span></span><br><span class="line"><span class="comment"># 快速定位</span></span><br><span class="line">G                   <span class="comment"># 快速跳转到最后一行</span></span><br><span class="line">gg                  <span class="comment"># 快速跳转到第一行</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-4-查看文件"><a href="#7-4-查看文件" class="headerlink" title="7.4 查看文件"></a>7.4 查看文件</h4><blockquote>
+<p>根据不同的业务，可以选择不同的查看方式</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看文件，直接展示到最后一行</span></span><br><span class="line"><span class="built_in">cat</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从第一行开始查看文件内容，展示全部</span></span><br><span class="line"><span class="built_in">tac</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从最后一行开始展示</span></span><br><span class="line"><span class="built_in">nl</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示文件的用时，展示行号</span></span><br><span class="line">more 文件名</span><br><span class="line"><span class="comment"># 查看大文件时，可以一页一页的向下翻</span></span><br><span class="line"><span class="comment"># 嗯space向下翻页，退出时摁q</span></span><br><span class="line"></span><br><span class="line">less 文件名</span><br><span class="line"><span class="comment"># 查看大文件时，可以任意的向上或者向下翻</span></span><br><span class="line"><span class="comment"># 向上或向下翻页摁PageUp和PageDown，一行一行查看，摁光标的↑↓</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 只查看前几行</span></span><br><span class="line"><span class="built_in">head</span> 文件名</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只查看后几行</span></span><br><span class="line"><span class="built_in">tail</span> 文件名</span><br><span class="line"><span class="comment"># tail -f 日志 监控日志</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-5-移动、重命名文件"><a href="#7-5-移动、重命名文件" class="headerlink" title="7.5 移动、重命名文件"></a>7.5 移动、重命名文件</h4><blockquote>
+<p>移动、重命名目录，会根据第二个参数指定具体操作逻辑</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mv</span> 文件名 新文件名 | 路径</span><br><span class="line"><span class="comment"># 如果第二个参数指定的路径不存在，就是重命名，如果第二个参数的路径存在，就是移动</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-6-复制文件"><a href="#7-6-复制文件" class="headerlink" title="7.6 复制文件"></a>7.6 复制文件</h4><blockquote>
+<p>复制文件到指定目录下</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> 文件名 目录</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="7-7-删除文件"><a href="#7-7-删除文件" class="headerlink" title="7.7 删除文件"></a>7.7 删除文件</h4><blockquote>
+<p>删除文件方式</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> [-f] 文件名</span><br><span class="line"><span class="comment"># -f：是否询问</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="八、Linux的压缩包命令【重点】"><a href="#八、Linux的压缩包命令【重点】" class="headerlink" title="八、Linux的压缩包命令【重点】"></a>八、Linux的压缩包命令【<code>重点</code>】</h3><hr>
+<h4 id="8-1-针对tar命令"><a href="#8-1-针对tar命令" class="headerlink" title="8.1 针对tar命令"></a>8.1 针对tar命令</h4><blockquote>
+<p>Linux中常用的压缩包，大多是.tar，.tar.gz，tgz的</p>
+</blockquote>
+<h5 id="8-1-1-解压压缩包"><a href="#8-1-1-解压压缩包" class="headerlink" title="8.1.1 解压压缩包"></a>8.1.1 解压压缩包</h5><blockquote>
+<p>针对压缩包后缀的情况，采用不同的参数，否则可能会损失文件</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">tar [-zxvf] 压缩包名称 [-C 路径]</span><br><span class="line"><span class="comment"># -z： 代表压缩包后缀是.gz的</span></span><br><span class="line"><span class="comment"># -x： 代表解压</span></span><br><span class="line"><span class="comment"># -v： 解压时，打印详细信息</span></span><br><span class="line"><span class="comment"># -f： -f选项必须放在所有选项的最后，代表指定文件名称</span></span><br><span class="line"><span class="comment"># -C 路径： 代表将压缩包内容解压到指定路径</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="8-1-2-打包成压缩包"><a href="#8-1-2-打包成压缩包" class="headerlink" title="8.1.2 打包成压缩包"></a>8.1.2 打包成压缩包</h5><blockquote>
+<p>可以将多个文件以及目录打包成压缩包，根据选择的参数指定压缩包名</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar [-zcvf] 压缩包名称 文件1 文件2 目录1 目录2 ...</span><br><span class="line"><span class="comment"># -c： 代表打包</span></span><br><span class="line"><span class="comment"># 其他参数同上</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="8-2-针对zip类型压缩包"><a href="#8-2-针对zip类型压缩包" class="headerlink" title="8.2 针对zip类型压缩包"></a>8.2 针对zip类型压缩包</h4><blockquote>
+<p>Linux不仅仅针对tar类型的压缩包，也支持zip，rar这种Windows下的压缩包。</p>
+<p>不过需要安装软件针对对各种类型压缩包的操作</p>
+</blockquote>
+<h5 id="8-2-1-安装软件"><a href="#8-2-1-安装软件" class="headerlink" title="8.2.1 安装软件"></a>8.2.1 安装软件</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install zip     <span class="comment"># 打包程序</span></span><br><span class="line">yum -y install unzip   <span class="comment"># 解压程序</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="8-2-2-解压以及打包"><a href="#8-2-2-解压以及打包" class="headerlink" title="8.2.2 解压以及打包"></a>8.2.2 解压以及打包</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 解压</span></span><br><span class="line">unzip 压缩包名称</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打包</span></span><br><span class="line">zip 压缩包名称 文件1 文件2 目录1 目录2 ...</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="九、用户-amp-用户组的操作"><a href="#九、用户-amp-用户组的操作" class="headerlink" title="九、用户&amp;用户组的操作"></a>九、用户&amp;用户组的操作</h3><hr>
+<h4 id="9-1-用户的常用操作命令"><a href="#9-1-用户的常用操作命令" class="headerlink" title="9.1 用户的常用操作命令"></a>9.1 用户的常用操作命令</h4><blockquote>
+<p>Linux是一个多用户的操作系统，任何一个用户想要操作Linux操作系统，必须向系统管理员申请一个账号才可以，并且以这个账号的身份去操作Linux。</p>
+<p>用户的账号一方面可以帮助系统管理员追踪当前用户的操作。另一方面可以控制当前用户对系统资源访问。</p>
+</blockquote>
+<h5 id="9-1-1-用户的创建"><a href="#9-1-1-用户的创建" class="headerlink" title="9.1.1 用户的创建"></a>9.1.1 用户的创建</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">useradd [-cgd] [选项指定的具体内容] 用户名</span><br><span class="line"><span class="comment"># -c：代表comment，给用户添加一段注释</span></span><br><span class="line"><span class="comment"># -g：代表group，可以修改用户的所在组</span></span><br><span class="line"><span class="comment"># -d：代表指定用户的HOME目录</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-1-2-设置用户密码"><a href="#9-1-2-设置用户密码" class="headerlink" title="9.1.2 设置用户密码"></a>9.1.2 设置用户密码</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd 用户名</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-1-3-切换用户"><a href="#9-1-3-切换用户" class="headerlink" title="9.1.3 切换用户"></a>9.1.3 切换用户</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su 用户名</span><br><span class="line"><span class="comment"># [root@localhost ~]#   -&gt; root用户在本地登录，并且当前在~目录下，#代表是超级管理员</span></span><br><span class="line"><span class="comment"># [qf@localhost ~]$		-&gt; qf用户在本地登录，并且当前在~目录下，$代表是普通用户</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-1-4-删除用户"><a href="#9-1-4-删除用户" class="headerlink" title="9.1.4 删除用户"></a>9.1.4 删除用户</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">userdel [-r] 用户名</span><br><span class="line"><span class="comment"># -r： 代表删除用户的同时，删除该用户的HOME目录</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-1-5-修改用户"><a href="#9-1-5-修改用户" class="headerlink" title="9.1.5 修改用户"></a>9.1.5 修改用户</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">usermod [-cgd] [选项指定的具体内容] 用户名</span><br><span class="line"><span class="comment"># -c：代表comment，给用户添加一段注释</span></span><br><span class="line"><span class="comment"># -g：代表group，可以修改用户的所在组</span></span><br><span class="line"><span class="comment"># -d：代表指定用户的HOME目录</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="9-2-用户组的操作"><a href="#9-2-用户组的操作" class="headerlink" title="9.2 用户组的操作"></a>9.2 用户组的操作</h4><blockquote>
+<p>用户的身份除了用户本身，还会分配到指定的用户组，可以通过用户组对设置一些文件的操作权限</p>
+</blockquote>
+<h5 id="9-2-1-创建用户组"><a href="#9-2-1-创建用户组" class="headerlink" title="9.2.1 创建用户组"></a>9.2.1 创建用户组</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">groupadd 用户组名</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-2-2-修改用户组"><a href="#9-2-2-修改用户组" class="headerlink" title="9.2.2 修改用户组"></a>9.2.2 修改用户组</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupmod [-n] [选项指定的具体内容] 用户组名</span><br><span class="line"><span class="comment"># -n 修改用户组名称</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="9-2-1-删除用户组"><a href="#9-2-1-删除用户组" class="headerlink" title="9.2.1 删除用户组"></a>9.2.1 删除用户组</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">groupdel 用户组名</span><br><span class="line"><span class="comment"># 只能删除不存在用户的用户组</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="十、文件权限的修改【重点】"><a href="#十、文件权限的修改【重点】" class="headerlink" title="十、文件权限的修改【重点】"></a>十、文件权限的修改【<code>重点</code>】</h3><hr>
+<blockquote>
+<p>首先我们要清楚Linux文件的权限信息</p>
+<p>在Linux中输入ls -l 或者 ll查看文件和目录的详细信息</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">文件详情</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586268971368.png" alt="1586268971368" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>实例中，a目录的第一个属性用“d”标识这个a是一个目录。</p>
+<p>anaconda-ks.cfg第一个属性用“-”标识他是一个文件。</p>
+<p>在Linux文件详情的后面属性需要分为三组查看</p>
+<ul>
+<li>rwx： 代表文件拥有者的权限</li>
+<li>rwx： 代表文件所属组用户的权限</li>
+<li>rwx： 代表其他用户对当前文件的操作权限<ul>
+<li>r： 代表read，读的权限</li>
+<li>w： 代表write，写的权限</li>
+<li>x： 代表execute，代表执行权限</li>
+</ul>
+</li>
+</ul>
+<p>其余信息</p>
+<ul>
+<li><p>后续的第一个root：代表当前文件的拥有者</p>
+</li>
+<li><p>后续的第二个root： 代表当前文件的所属组</p>
+</li>
+<li><p>后续分别为：文件的大小和最后修改时间等信息</p>
+</li>
+</ul>
+</blockquote>
+<h4 id="10-1-对文件的权限修改"><a href="#10-1-对文件的权限修改" class="headerlink" title="10.1 对文件的权限修改"></a>10.1 对文件的权限修改</h4><blockquote>
+<p>使用chmod对文件的权限进行修改，一种使用数字，一种使用符号……</p>
+<ul>
+<li>数字方式方便操作，不过要修改整体权限信息</li>
+<li>符号方式更细粒度华，不过操作麻烦</li>
+</ul>
+</blockquote>
+<h5 id="10-1-1-数字方式"><a href="#10-1-1-数字方式" class="headerlink" title="10.1.1 数字方式"></a>10.1.1 数字方式</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> [-R] 777 文件|目录</span><br><span class="line"><span class="comment"># rwx在这三个权限中r：4，w：2，x：1</span></span><br><span class="line"><span class="comment"># -R： 当修改一个目录权限时，可以添加-R，将目录下的全部内容，都修改权限。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="10-1-2-符号方式"><a href="#10-1-2-符号方式" class="headerlink" title="10.1.2 符号方式"></a>10.1.2 符号方式</h5><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> [-R] a=rw 文件|目录</span><br><span class="line"><span class="comment"># user：u，group：g，other：o，all：a</span></span><br><span class="line"><span class="comment"># read：r，write：w，execute：x</span></span><br><span class="line"><span class="comment"># 赋予权限的方式 , 添加：+，减掉：-，设定：=</span></span><br><span class="line"><span class="comment"># -R： 当修改一个目录权限时，可以添加-R，将目录下的全部内容，都修改权限。</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="10-2-文件拥有者及所属组修改"><a href="#10-2-文件拥有者及所属组修改" class="headerlink" title="10.2 文件拥有者及所属组修改"></a>10.2 文件拥有者及所属组修改</h4><blockquote>
+<p>chown可以直接修改拥有者和所属组，chgrp只能修改所属组……</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 修改文件的拥有者和所属组</span></span><br><span class="line"><span class="built_in">chown</span> [-R] 拥有者：所属组 文件|目录</span><br><span class="line"><span class="comment"># 修改文件的拥有者</span></span><br><span class="line"><span class="built_in">chown</span> [-R] 拥有者 文件|目录</span><br><span class="line"><span class="comment"># 修改文件的所属组</span></span><br><span class="line"><span class="built_in">chgrp</span> [-R] 所属组 文件|目录</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="十一、Linux的其他操作命令【重点】"><a href="#十一、Linux的其他操作命令【重点】" class="headerlink" title="十一、Linux的其他操作命令【重点】"></a>十一、Linux的其他操作命令【<code>重点</code>】</h3><hr>
+<h4 id="11-1-进程的操作"><a href="#11-1-进程的操作" class="headerlink" title="11.1 进程的操作"></a>11.1 进程的操作</h4><blockquote>
+<p>需要用到类似Windows的结束进程时，在Linux下需要使用如下命令</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps -ef </span><br><span class="line"><span class="comment"># 查看全部正在运行的进程</span></span><br><span class="line">ps -ef | grep 搜索的内容</span><br><span class="line"><span class="comment"># 杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> -9 pid</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11-2-服务的操作"><a href="#11-2-服务的操作" class="headerlink" title="11.2 服务的操作"></a>11.2 服务的操作</h4><blockquote>
+<p>和Windows下的服务操作一致，只需使用如下命令，默认为centos7版本</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 针对服务的启动，停止，重启，开机自动启动，禁止开机自动启动，查看服务状态。</span></span><br><span class="line">systemctl start|stop|restart|<span class="built_in">enable</span>|<span class="built_in">disable</span>|status 服务名称</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11-3-端口号查看"><a href="#11-3-端口号查看" class="headerlink" title="11.3 端口号查看"></a>11.3 端口号查看</h4><blockquote>
+<p>如发现端口号被占用，可以使用如下方式查找pid，并结束进程</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 想使用指定的命令需要事先下载netstat</span></span><br><span class="line">yum -y install net-tools</span><br><span class="line"><span class="comment"># 查看端口号占用情况</span></span><br><span class="line">netstat -naop | grep 端口号</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11-4-访问地址"><a href="#11-4-访问地址" class="headerlink" title="11.4 访问地址"></a>11.4 访问地址</h4><blockquote>
+<p>类似浏览器访问路径，无法图形化显示，一般用于测试</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl 访问地址</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="11-5-查找文件"><a href="#11-5-查找文件" class="headerlink" title="11.5 查找文件"></a>11.5 查找文件</h4><blockquote>
+<p>在Linux中查找指定文件，参数较多，如下为根据文件名称查询</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find 路径 -<span class="built_in">type</span> f | grep profile</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="十二、Linux下安装软件【重点】"><a href="#十二、Linux下安装软件【重点】" class="headerlink" title="十二、Linux下安装软件【重点】"></a>十二、Linux下安装软件【<code>重点</code>】</h3><hr>
+<h4 id="12-1-安装JDK"><a href="#12-1-安装JDK" class="headerlink" title="12.1 安装JDK"></a>12.1 安装JDK</h4><blockquote>
+<p>在Linux下安装JDK，并配置JAVA_HOME环境变量……</p>
+</blockquote>
+<h5 id="12-1-1-下载JDK的压缩包"><a href="#12-1-1-下载JDK的压缩包" class="headerlink" title="12.1.1 下载JDK的压缩包"></a>12.1.1 下载JDK的压缩包</h5><blockquote>
+<p>去逛网下载压缩包，由于oracle官网更新，需要登录并同意协议才允许下载</p>
+<p><a href="">https://www.oracle.com/java/technologies/javase-jdk8-downloads.html</a></p>
+</blockquote>
+<h5 id="12-1-2-将jdk压缩包拉取到Linux系统中"><a href="#12-1-2-将jdk压缩包拉取到Linux系统中" class="headerlink" title="12.1.2 将jdk压缩包拉取到Linux系统中"></a>12.1.2 将jdk压缩包拉取到Linux系统中</h5><blockquote>
+<p>需要使用图形化界面的Sftp拖拽到Linux操作系统</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">Xterm的Sftp图</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1589258771046.png" alt="1589258771046" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="12-1-3-将jdk的压缩包解压"><a href="#12-1-3-将jdk的压缩包解压" class="headerlink" title="12.1.3 将jdk的压缩包解压"></a>12.1.3 将jdk的压缩包解压</h5><blockquote>
+<p>后期大多软件都安装在/usr/local下，直接使用tar解压</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf jdk-8u241-linux-x64.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-1-4-将jdk的目录名修改一下"><a href="#12-1-4-将jdk的目录名修改一下" class="headerlink" title="12.1.4 将jdk的目录名修改一下"></a>12.1.4 将jdk的目录名修改一下</h5><blockquote>
+<p>为了方便配置环境变量，修改一下目录名称</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local</span><br><span class="line"><span class="built_in">mv</span> jdk1.8.0_241 jdk</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-1-5-配置环境变量"><a href="#12-1-5-配置环境变量" class="headerlink" title="12.1.5 配置环境变量"></a>12.1.5 配置环境变量</h5><blockquote>
+<p>Linux提供了两种环境变量的文件</p>
+<ul>
+<li>第一个是用户级别的环境变量，存放在：~/.bashrc</li>
+<li>第二个是系统级别的环境变量，存放在：/etc/profile</li>
+</ul>
+<p>修改哪个文件都可以，毕竟虚拟机就我们自己使用</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在环境变量文件中，添加如下内容</span></span><br><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/local/jdk</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="comment"># 重新加载环境变量文件</span></span><br><span class="line"><span class="built_in">source</span> /etc/profile</span><br><span class="line"><span class="comment"># 最终测试</span></span><br><span class="line">java -version</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">测试效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586307863331.png" alt="1586307863331" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h4 id="12-2-安装MySQL"><a href="#12-2-安装MySQL" class="headerlink" title="12.2 安装MySQL"></a>12.2 安装MySQL</h4><blockquote>
+<p>在MySQL下用yum的方式安装MySQL……</p>
+</blockquote>
+<h5 id="12-2-1-安装MySQL的YUM存储库"><a href="#12-2-1-安装MySQL的YUM存储库" class="headerlink" title="12.2.1 安装MySQL的YUM存储库"></a>12.2.1 安装MySQL的YUM存储库</h5><blockquote>
+<p>使用wget下载即可，不过需要先下载wget，再通过wget下载rpm包</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先通过yum下载wget命令</span></span><br><span class="line">yum -y install wget</span><br><span class="line"><span class="comment"># 通过wget下载MySQL存储库</span></span><br><span class="line">wget https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-2-2-安装下载好的rpm包"><a href="#12-2-2-安装下载好的rpm包" class="headerlink" title="12.2.2 安装下载好的rpm包"></a>12.2.2 安装下载好的rpm包</h5><blockquote>
+<p>使用rpm包的命令直接安装</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装rpm包</span></span><br><span class="line">rpm -Uvh mysql80-community-release-el7-3.noarch.rpm</span><br><span class="line"><span class="comment"># 查看rpm包</span></span><br><span class="line">rpm -qa | grep 内容</span><br><span class="line"><span class="comment"># 卸载rpm  （不需要指定当前命令。。。）</span></span><br><span class="line">rpm -e --nodeps rpm名称</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-2-3-选择发行版本"><a href="#12-2-3-选择发行版本" class="headerlink" title="12.2.3 选择发行版本"></a>12.2.3 选择发行版本</h5><blockquote>
+<p>由于默认安装8.0版本的MySQL，我们需要修改为5.7版本</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看一下默认选择的发行版本</span></span><br><span class="line">yum repolist all | grep mysql</span><br><span class="line"><span class="comment"># 通过编辑/etc/yum.repos.d/mysql-community.repo文件，去修改发行版本</span></span><br><span class="line"><span class="comment"># 将80的enabled更改为0，将67的enabled更改为1，保存即可，再次通过yum repolist all | grep mysql查看</span></span><br><span class="line"><span class="comment"># 效果如下</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">MySQL安装版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586309805089.png" alt="1586309805089" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h5 id="12-2-4-安装MySQL社区版服务"><a href="#12-2-4-安装MySQL社区版服务" class="headerlink" title="12.2.4 安装MySQL社区版服务"></a>12.2.4 安装MySQL社区版服务</h5><blockquote>
+<p>开始安装，这一步需要下载一段时间，下载失败就是网络较差了，学会科学上网</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install mysql-community-server</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-2-5-启动MySQL服务，并连接"><a href="#12-2-5-启动MySQL服务，并连接" class="headerlink" title="12.2.5 启动MySQL服务，并连接"></a>12.2.5 启动MySQL服务，并连接</h5><blockquote>
+<p>安装成功后，手动启动，并使用日志中的密码登陆，而且第一个操作必须是修改密码，才可后续正常操作</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启动MySQL服务</span></span><br><span class="line">systemctl start mysqld.service</span><br><span class="line"><span class="comment"># 查看初始化密码</span></span><br><span class="line">grep <span class="string">&#x27;temporary password&#x27;</span> /var/log/mysqld.log</span><br><span class="line"><span class="comment"># 连接MySQL服务</span></span><br><span class="line">mysql -u root -p</span><br><span class="line">Enter password:随机密码</span><br><span class="line"><span class="comment"># 修改密码</span></span><br><span class="line">mysql&gt; ALTER USER <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;localhost&#x27;</span> IDENTIFIED BY <span class="string">&#x27;P@ssw0rd&#x27;</span>;</span><br><span class="line"><span class="comment"># 要求密码，必须携带大写字母，小写字母，数字，特殊符号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-2-6-开启远程连接"><a href="#12-2-6-开启远程连接" class="headerlink" title="12.2.6 开启远程连接"></a>12.2.6 开启远程连接</h5><blockquote>
+<p>默认MySQL禁止远程链接，需要单独创建一个用户开启远程链接，这样就可以在windows下使用图形化工具连接</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;eric&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;P@ssw0rd&#x27;</span> WITH GRANT OPTION;</span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="12-3-安装Tomcat"><a href="#12-3-安装Tomcat" class="headerlink" title="12.3 安装Tomcat"></a>12.3 安装Tomcat</h4><blockquote>
+<p>在Linux下安装Tomcat，以便部署工程到Linux操作系统</p>
+</blockquote>
+<h5 id="12-3-1-下载Tomcat的压缩包"><a href="#12-3-1-下载Tomcat的压缩包" class="headerlink" title="12.3.1 下载Tomcat的压缩包"></a>12.3.1 下载Tomcat的压缩包</h5><blockquote>
+<p>通过wget直接下载即可</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://mirrors.tuna.tsinghua.edu.cn/apache/tomcat/tomcat-8/v8.5.53/bin/apache-tomcat-8.5.53.tar.gz</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-3-2-解压压缩包"><a href="#12-3-2-解压压缩包" class="headerlink" title="12.3.2 解压压缩包"></a>12.3.2 解压压缩包</h5><blockquote>
+<p>一样解压到/usr/local目录下</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-tomcat-8.5.53.tar.gz -C /usr/local</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="12-3-3-启动Tomcat并监听日志"><a href="#12-3-3-启动Tomcat并监听日志" class="headerlink" title="12.3.3 启动Tomcat并监听日志"></a>12.3.3 启动Tomcat并监听日志</h5><blockquote>
+<p>通过./执行可运行文件，并使用tail监控日志信息</p>
+</blockquote>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 跳转到tomcat的bin目录</span></span><br><span class="line"><span class="built_in">cd</span> /usr/local/apache-tomcat-8.5.53/bin</span><br><span class="line"><span class="comment"># 启动</span></span><br><span class="line">./startup.sh</span><br><span class="line"><span class="comment"># 监控日志</span></span><br><span class="line"><span class="built_in">cd</span> ../logs</span><br><span class="line"><span class="built_in">tail</span> -f catalina.out</span><br><span class="line"><span class="comment"># 启动成功如下</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th align="center">日志及Tomcat首页</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="/img/Linux/1586313889843.png" alt="1586313889843" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+<tr>
+<td align="center"><img src="/img/Linux/1586313916362.png" alt="1586313916362" loading="lazy" onerror='this.onerror=null;this.src="/ehan/img/404.jpg"'></td>
+</tr>
+</tbody></table>
+<h3 id="十三、部署SSM工程"><a href="#十三、部署SSM工程" class="headerlink" title="十三、部署SSM工程"></a>十三、部署SSM工程</h3><hr>
+<blockquote>
+<p>部署项目到Linux中需要注意一下内容：</p>
+<ul>
+<li>项目要保证在Windows下是没有问题的，再考虑部署到Linux。</li>
+<li>将开发环境中的内容更改为测试环境。<ul>
+<li>连接数据库的信息。</li>
+<li>存放文件的路径。</li>
+<li>日志文件存放的位置。</li>
+<li>项目路径问题。</li>
+</ul>
+</li>
+<li>将Maven项目打包。</li>
+<li>根据项目路径的不同，将项目部署到Tomcat中。</li>
+<li>在部署到Linux操作系统中后，一定要查看日志。</li>
+</ul>
+</blockquote>
+
+</article>
+    
+    <div class="trm-reward">
+        
+            <span class="trm-reward-btn trm-glow" onclick='var qr = document.getElementById("qr"); qr.style.display = (qr.style.display === "none") ? "block" : "none";'>
+                <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-dashang-01"></use>
+</svg>
+            </span>
+        
+        <p class="trm-reward-comment">打赏</p>
+        <div id="qr" style="display:none;">
+            
+                <div style="display:inline-block">
+                    <a rel="noopener noreferrer" href='/img/weixin.jpg' target='_blank' >
+                       <img src="/ehan/img/weixin.jpg" alt="微信" loading="lazy">
+                    </a>
+                    <p>微信</p>
+                </div>
+            
+        </div>
+    </div>
+
+    
+</div>
+<div id="post-next-prev" class="row">
+    <div class="col-lg-12">
+        <!-- title -->
+        <h5 class="trm-title-with-divider">
+            其他文章
+            <span data-number="02"></span>
+        </h5>
+    </div>
+    
+        <div class="col-lg-6">
+    <div class="trm-blog-card trm-scroll-animation" data-scroll data-scroll-offset="40">
+        <a href="/ehan/2023/03/29/Docker/" class="trm-cover-frame trm-anima-link">
+            
+            
+                <img alt="cover" class="no-fancybox" src="/ehan/img/Docker/dockers.png">
+            
+        </a>
+        
+        <div class="trm-card-descr">
+            <div class="trm-label trm-category trm-mb-20">
+                <a href=" #.">
+                    未分类
+                </a>
+            </div>
+            <h5>
+                <a href="/ehan/2023/03/29/Docker/" class="trm-anima-link">
+                    Docker安装使用以及常见命令
+                </a>
+            </h5>
+            <div class="trm-divider trm-mb-20 trm-mt-20"></div>
+            <ul class="trm-card-data trm-label">
+                <li>23/03/29</li>
+                <li>21:47</li>
+                
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+    
+
+
+
+                    <div class="trm-divider footer-divider"></div>
+
+                    <!-- footer -->
+                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
+
+    
+
+    
+        <div class="trm-footer-item">
+            <span>© 2023- 2023</span>
+            <span class="footer-separator"data-separator=" · "></span>
+            <span class="trm-accent-color">饿汉博客</span>
+        </div>
+    
+
+    
+        <div class="trm-footer-item">
+            <span>
+                由 <a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> 驱动 v5.4.2
+            </span>
+            <span class="footer-separator" data-separator=" | "></span>
+            <span> 
+                主题 - 
+                <a rel="noopener" href='https://github.com/MaLuns/hexo-theme-async' target='_blank'>Async</a>
+                v2.0.4
+            </span>
+        </div>
+      
+
+    
+        <div class="trm-footer-item">
+            博客已萌萌哒运行 <span id="since" class="trm-accent-color"></span> 天
+        </div>
+     
+
+     
+</footer>
+
+<script>
+    function show_date_time () {
+        var BirthDay = new Date("03/30/2023 17:00:00");
+        var today = new Date();
+        var timeold = (today.getTime() - BirthDay.getTime());
+        var msPerDay = 24 * 60 * 60 * 1000
+        var day = Math.floor(timeold / msPerDay)
+        since.innerHTML = day
+    }
+    show_date_time()
+</script>
+ 
+                    <!-- footer end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+            <!-- body end -->
+
+            <div class="trm-fixed-container" data-scroll data-scroll-sticky data-scroll-target=".locomotive-scroll__sticky-target" data-scroll-offset="-10">
+    
+        <div class="trm-fixed-btn" data-title="阅读模式" onclick="asyncFun.switchReadMode()">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-yuedu"></use>
+</svg>
+        </div>
+    
+    
+        <div class="trm-fixed-btn" data-title="单栏和双栏切换" onclick="asyncFun.switchSingleColumn()">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-moduanzuoyouzhankai"></use>
+</svg>
+        </div>
+    
+    <div id="trm-back-top" class="trm-fixed-btn" data-title="回到顶部">
+        <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-fanhuidingbu"></use>
+</svg>
+    </div>
+</div>
+          </div>
+        </div>
+      </div>
+      <!-- scroll container end -->
+
+  </div>
+  <!-- app wrapper end -->
+
+  
+  <!-- Plugin -->
+
+
+
+
+    
+    
+<script src="https://npm.elemecdn.com/locomotive-scroll@4.1.4/dist/locomotive-scroll.min.js"></script>
+
+    
+<script src="https://npm.elemecdn.com/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+    
+
+    
+        <script src="/ehan/js/plugins/typing.js?v=2.0.4"></script>
+    
+
+    
+
+    <!-- 数学公式 -->
+    
+
+    <!-- 评论插件 -->
+    
+        
+
+        
+    
+
+
+
+<!-- CDN -->
+
+
+    
+
+    
+
+    
+
+
+
+
+    <!-- Service Worker -->
+    
+    <!-- baidu push -->
+    
+
+
+<script id="async-script" src="/ehan/js/main.js?v=2.0.4"></script>
+
+</body>
+
+</html>
