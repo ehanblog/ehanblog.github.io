@@ -60,12 +60,12 @@
 
 
     
-<script src="//at.alicdn.com/t/c/font_3023168_rtkz4w4zc8.js"></script>
+<script src="//at.alicdn.com/t/c/font_3023168_1jx4fq0ggxc.js"></script>
 
 
 
 <!-- Variable -->
-<script>window.ASYNC_CONFIG = {"hostname":"ehanblog.github.io","author":"Mr Wang","root":"/","typed_text":["阅读博客"],"theme_version":"2.0.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.png","icon16":"/img/favicon.svg","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"icon-sun","moon":"icon-moon","play":"fas fa-play","email":"icon-email-fill","next":"fas fa-arrow-right","calendar":"icon-a-riqi11","clock":"icon-shijian","user":"icon-zuozhe","back_top":"icon-fanhuidingbu","close":"icon-guanbi","search":"fas fa-search","reward":"icon-dashang-01","user_tag":"icon-yonghu","toc_tag":"icon-mulu","read":"icon-yuedu","arrows":"icon-moduanzuoyouzhankai","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"symbol","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false}};</script>
+<script>window.ASYNC_CONFIG = {"hostname":"ehanblog.github.io","author":"Mr Wang","root":"/","typed_text":["阅读博客"],"theme_version":"2.0.4","theme":{"switch":true,"default":"style-light"},"favicon":{"logo":"/img/favicon.png","icon16":"/img/favicon.svg","icon32":"/img/favicon.png","appleTouchIcon":null,"webmanifest":null,"visibilitychange":false,"hidden":"/failure.ico","showText":"(/≧▽≦/)咦！又好了！","hideText":"(●—●)喔哟，崩溃啦！"},"i18n":{"placeholder":"搜索...","empty":"找不到您查询的内容: ${query}","hits":"找到 ${hits} 条结果","hits_time":"找到 ${hits} 条结果（用时 ${time} 毫秒）","author":"本文作者：","copyright_link":"本文链接：","copyright_license_title":"版权声明：","copyright_license_content":"本博客所有文章除特别声明外，均默认采用 undefined 许可协议。","copy_success":"复制成功","copy_failure":"复制失败","open_read_mode":"进入阅读模式","exit_read_mode":"退出阅读模式","notice_outdate_message":"距离上次更新已经 undefined 天了, 文章内容可能已经过时。","just":"刚刚","min":"分钟前","hour":"小时前","day":"天前","month":"个月前"},"swup":false,"plugin":{"flickr_justified_gallery":"https://npm.elemecdn.com/flickr-justified-gallery@latest/dist/fjGallery.min.js"},"icons":{"sun":"icon-sun","moon":"icon-moon","play":"fas fa-play","email":"icon-email-fill","next":"fas fa-arrow-right","calendar":"icon-a-riqi11","clock":"icon-shijian","user":"icon-zuozhe","back_top":"icon-fanhuidingbu","close":"icon-guanbi","search":"icon-sousuo","reward":"icon-dashang-01","user_tag":"icon-yonghu","toc_tag":"icon-mulu","read":"icon-yuedu","arrows":"icon-moduanzuoyouzhankai","double_arrows":"fas fa-angle-double-down","copy":"fas fa-copy"},"icontype":"symbol","highlight":{"plugin":"highlighjs","theme":true,"copy":true,"lang":true,"title":"default","height_limit":false},"search":{"enable":true,"type":"local","href":"https://www.google.com/search?q=site:","domain":null,"path":"search.xml"}};</script>
 <script id="async-page-config">window.PAGE_CONFIG = {"isPost":true,"isHome":false,"postUpdate":"2023-03-31 17:00:25"};</script>
 
 <!-- Theme mode css -->
@@ -220,6 +220,14 @@
     <!-- mode switcher place end -->
 
 			
+    
+    <div id="trm-search-btn" class="trm-search-btn">
+        <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-sousuo"></use>
+</svg>
+    </div>
+     
+
 		</div>
 		<div class="trm-menu-btn">
 			<span></span>
@@ -554,6 +562,50 @@
 
     
 
+    <div id="giscus-wrap" class="trm-card trm-scroll-animation comment-container" data-scroll data-scroll-offset="50"></div>
+<script data-swup-reload-script>
+    function loadGiscus() {
+        let nowTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        const config = {
+            src: 'https://giscus.app/client.js',
+            "data-repo": 'ehanblog/ehanblog.github.io',
+            "data-repo-id": 'R_kgDOJQ4U5g',
+            "data-category": 'Q&A',
+            "data-category-id": 'DIC_kwDOJQ4U5s4CVdYn',
+            "data-mapping": 'pathname',
+            "data-reactions-enabled": '1',
+            "data-emit-metadata": '0',
+            "data-theme": nowTheme,
+            "data-lang": 'zh-CN',
+            crossorigin: "anonymous",
+            async: true
+        }
+        let ele = document.createElement('script')
+        for (let key in config) {
+            ele.setAttribute(key, config[key])
+        }
+        document.getElementById('giscus-wrap').insertAdjacentElement('afterbegin', ele)
+    }
+
+    function changeGiscusTheme() {
+        let theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+
+        function sendMessage(message) {
+            const iframe = document.querySelector('iframe.giscus-frame');
+            if (!iframe) return;
+            iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+
+        sendMessage({
+            setConfig: {
+                theme: theme
+            }
+        });
+    }
+
+    loadGiscus();
+</script>
+
 
 
                     <div class="trm-divider footer-divider"></div>
@@ -645,6 +697,22 @@
   <!-- app wrapper end -->
 
   
+<div class="trm-search-popup">
+    <div class="trm-search-header">
+        <span class="trm-search-popup-btn-close">
+            <svg class="symbol-icon " aria-hidden="true">
+    <use xlink:href="#icon-guanbi"></use>
+</svg>
+        </span>
+    </div>
+    <div class="form trm-search-form">
+        <input class="trm-search-input" type="text" placeholder="搜索...">
+    </div>
+    <div class="trm-search-result-container">
+
+    </div>
+</div>
+
   <!-- Plugin -->
 
 
@@ -663,6 +731,11 @@
         <script src="/js/plugins/typing.js?v=2.0.4"></script>
     
 
+    
+        
+<script src="https://npm.elemecdn.com/hexo-generator-searchdb@1.4.0/dist/search.js"></script>
+
+        <script src="/js/plugins/local_search.js?v=2.0.4"></script>
     
 
     <!-- 数学公式 -->
